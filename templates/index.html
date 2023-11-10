@@ -36,16 +36,29 @@
   <div class="container mt-5">
     <div class="row">
       <!-- Левая колонка с постами -->
-      <<div class="col-md-8">
-        {% for post in posts %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ post['title'] }}</h5>
-                    <p class="card-text">{{ post['text'] }}</p>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+      <!-- Левая колонка с постами -->
+<!-- Левая колонка с постами -->
+<div class="col-md-8">
+{% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          {% for category, message in messages %}
+              <div class="alert alert-{{ category }}" role="alert">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      {% endif %}
+  {% endwith %}
+  
+  {% for post in posts %}
+      <div class="card mb-3">
+          <div class="card-body">
+              <h5 class="card-title">{{ post['title'] }}</h5>
+              <p class="card-text">{{ post['text'] }}</p>
+          </div>
+      </div>
+  {% endfor %}
+</div>
+
         <!-- Рекомендации друзей или другие модули могут быть добавлены здесь -->
         
       </div>

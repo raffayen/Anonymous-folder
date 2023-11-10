@@ -1,9 +1,9 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, flash, redirect
 import pickledb
 
 
 app = Flask(__name__)
-
+app.secret_key = '12022008'
 
 db = pickledb.load('base.db', True)
 
@@ -49,9 +49,11 @@ def create_post():
         
         set_info(post_title, post_text)
         
+        # Добавляем сообщение о публикации поста в объект запроса
+        flash('Пост опубликован!', 'success')
+        
+        return redirect('/')
 
-        return f'Post created! Title: {post_title}, Text: {post_text}'
-    
     
 
 app.run(debug=True)
