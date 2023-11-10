@@ -1,73 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Социальная сеть</title>
-  <!-- Подключение Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-  <!-- Навигационная панель Bootstrap -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Социальная сеть</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Главная</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Профиль</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Друзья</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Выход</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+{% extends "base.html" %}
 
-  <!-- Основной контент страницы -->
-  <div class="container mt-5">
-    <div class="row">
-      <!-- Левая колонка с постами -->
-      <!-- Левая колонка с постами -->
-<!-- Левая колонка с постами -->
-<div class="col-md-8">
-{% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-          {% for category, message in messages %}
-              <div class="alert alert-{{ category }}" role="alert">
-                  {{ message }}
-              </div>
-          {% endfor %}
-      {% endif %}
-  {% endwith %}
-  
-  {% for post in posts %}
-      <div class="card mb-3">
-          <div class="card-body">
-              <h5 class="card-title">{{ post['title'] }}</h5>
-              <p class="card-text">{{ post['text'] }}</p>
-          </div>
-      </div>
-  {% endfor %}
-</div>
-
-        <!-- Рекомендации друзей или другие модули могут быть добавлены здесь -->
-        
-      </div>
-    </div>
+{% block body %}
+<div class="row">
+  <div class="col-md-8">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    {% for post in posts %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ post['title'] }}</h5>
+                <p class="card-text">{{ post['text'] }}</p>
+            </div>
+        </div>
+    {% endfor %}
   </div>
-
-  <!-- Подключение Bootstrap JS и зависимостей (Popper.js и jQuery) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>
+{% endblock body %}
